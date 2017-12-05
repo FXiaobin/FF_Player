@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic, assign) BOOL allowRotation; // 标记是否可以旋转
 
 @end
 

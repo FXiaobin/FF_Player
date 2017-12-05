@@ -8,15 +8,33 @@
 
 #import "AppDelegate.h"
 
+#import "ViewController.h"
+#import "BaseNavigationController.h"
+
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)nowWindow {
+    //是非支持横竖屏
+    if (_allowRotation) {
+        return UIInterfaceOrientationMaskLandscape;
+        
+    } else{
+        return UIInterfaceOrientationMaskPortrait;
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    
+    self.window.rootViewController = [[BaseNavigationController alloc] initWithRootViewController:[ViewController new]];
+    
     return YES;
 }
 
