@@ -67,6 +67,7 @@
         _progressSlider.maximumValue = 1.0;
         _progressSlider.value = 0.0;
         [_progressSlider setThumbImage:[UIImage imageNamed:@"my_icon01"] forState:UIControlStateNormal];
+        [_progressSlider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     }
     return _progressSlider;
 }
@@ -251,6 +252,15 @@
     sString =[NSString stringWithFormat:@"%d",s];
     
     return  [NSString stringWithFormat:@"%@:%@",mString,sString];
+    
+}
+
+- (void)sliderValueChanged:(UISlider *)slider{
+    double total = CMTimeGetSeconds(self.player.totalDuration);
+    double currlentTime = total * slider.value;
+    
+    CMTime cTime = CMTimeMake(1 * currlentTime, 1);
+    [self.player seekTo:cTime];
     
 }
 
